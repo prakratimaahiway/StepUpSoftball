@@ -1,4 +1,4 @@
-package com.maahiway.stepupsoftball.model
+package com.maahiway.stepupsoftball.data.model
 
 data class PlayerProfile(
     val id: String,
