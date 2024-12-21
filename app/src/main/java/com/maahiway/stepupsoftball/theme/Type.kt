@@ -1,4 +1,4 @@
-package com.maahiway.stepupsoftball.ui.theme
+package com.maahiway.stepupsoftball.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
