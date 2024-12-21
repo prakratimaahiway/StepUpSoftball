@@ -1,4 +1,4 @@
-package com.maahiway.stepupsoftball.ui
+package com.maahiway.stepupsoftball.ui.screens
 
 import androidx.compose.runtime.Composable
 

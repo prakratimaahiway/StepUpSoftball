@@ -1,4 +1,4 @@
-package com.maahiway.stepupsoftball.theme
+package com.maahiway.stepupsoftball.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
