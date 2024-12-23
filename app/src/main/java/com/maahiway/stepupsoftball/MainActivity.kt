@@ -3,45 +3,40 @@ package com.maahiway.stepupsoftball
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import com.maahiway.stepupsoftball.data.AppDatabase
+import com.maahiway.stepupsoftball.data.repository.PlayerProfileRepository
+import com.maahiway.stepupsoftball.ui.screens.CoachManagementScreen
 import com.maahiway.stepupsoftball.ui.theme.StepUpSoftballTheme
+import com.maahiway.stepupsoftball.viewmodel.CoachViewModel
+import com.maahiway.stepupsoftball.viewmodel.CoachViewModelFactory
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        // Setup Room database
+        val database = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "stepup-softball-database"
+        ).build()
+
+        // Setup PlayerProfileRepository
+        val playerProfileDao = database.playerProfileDao()
+        val playerProfileRepository = PlayerProfileRepository(playerProfileDao)
+
+        // Setup CoachViewModel with ViewModelFactory
+        val factory = CoachViewModelFactory(playerProfileRepository)
+        val coachViewModel = ViewModelProvider(this, factory).get(CoachViewModel::class.java)
+
         setContent {
             StepUpSoftballTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                // Pass the CoachViewModel to the Composable Screen
+                CoachManagementScreen(coachViewModel = coachViewModel)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    StepUpSoftballTheme {
-        Greeting("Android")
     }
 }

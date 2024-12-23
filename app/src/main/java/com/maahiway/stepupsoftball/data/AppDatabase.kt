@@ -10,5 +10,5 @@ import com.maahiway.stepupsoftball.data.entity.WalkoutSongEntity
 @Database(entities = [PlayerProfileEntity::class, WalkoutSongEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun playerProfileDao(): PlayerProfileDao
-    abstract fun walkoutSongDao(): WalkoutSongDao
+    abstract fun walkoutSongDao(): WalkoutSongDao  // Add the WalkoutSongDao
 }

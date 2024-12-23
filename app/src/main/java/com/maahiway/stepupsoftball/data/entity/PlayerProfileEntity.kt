@@ -8,5 +8,5 @@ data class PlayerProfileEntity(
     @PrimaryKey val id: String,
     val name: String,
     val teamName: String,
-    val walkoutSongId: String
+    val walkoutSongId: String?
 )
